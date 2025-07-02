@@ -194,7 +194,7 @@
     </style>
 </head>
 <body>
-    @if (auth()->user()->email=='codine01@gmail.com')
+    @if (auth()->user()->email==='codine01@gmail.com')
         <table>
             <caption>
                 <a href="{{ route('logout') }}"
