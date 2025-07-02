@@ -1,3 +1,4 @@
+<!-- filepath: c:\xampp\htdocs\Account\resources\views\auth\dashboard.blade.php -->
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -25,10 +26,13 @@
             --link: #7abaff;
             --link-hover: #a3d8ff;
         }
+        body, table, th, td, .dashboard-card, .dashboard-card h2, .dashboard-card .value {
+            color: var(--text);
+            background: transparent;
+        }
         body {
             background: linear-gradient(120deg, var(--bg) 0%, #414345 100%);
             font-family: 'Segoe UI', Arial, sans-serif;
-            color: var(--text);
             margin: 0;
             min-height: 100vh;
             transition: background 0.3s, color 0.3s;
@@ -132,7 +136,7 @@
                 grid-template-columns: repeat(2, minmax(0, 1fr));
                 gap: 12px;
                 max-width: 100%;
-            }
+            } 
         }
         @media (max-width: 400px) {
             .dashboard-cards {
@@ -183,9 +187,10 @@
         .dashboard-links a {
             color: var(--link);
             text-decoration: none;
-            font-size: 1.1rem;
-            margin: 0 12px;
+            font-size: 90%;
+            margin: 0 1%;
             transition: color 0.2s;
+            font-weight: 600
         }
         .dashboard-links a:hover {
             color: var(--link-hover);
@@ -195,17 +200,16 @@
 </head>
 <body>
     @if (auth()->user()->email==='codine01@gmail.com')
-        <table>
-            <caption>
-                <a href="{{ route('logout') }}"
-                   onclick="event.preventDefault();document.getElementById('logout-form').submit();">تسجيل الخروج</a> <br><br>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display:none;">
-                    @csrf
-                </form>
-                <a href="{{ route('register') }}">تسجيل مستخدم جديد</a><br><br>
-                <a href="{{ route('versment') }}">إجراء تحويل</a>
-                
-            </caption>
+        <div class="dashboard-links">
+            <a href="{{ route('logout') }}"
+               onclick="event.preventDefault();document.getElementById('logout-form').submit();">تسجيل الخروج</a>
+            <a href="{{ route('register') }}">تسجيل مستخدم جديد</a>
+            <a href="{{ route('versment') }}">إجراء تحويل</a>
+        </div>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display:none;">
+            @csrf
+        </form>
+        <table style="width:100%;margin-top:20px;">
             <thead>
                 <tr>
                     <th>الاسم</th>
@@ -215,7 +219,6 @@
                 </tr>
             </thead>
             <tbody>
-
                 @foreach($users as $user)
                     <tr>
                         <td>{{ $user->name }}</td>
@@ -227,83 +230,81 @@
             </tbody>
         </table>
     @else
-
-     <div class="mode-bar">
-        <button class="toggle-mode" id="toggleModeBtn" onclick="toggleMode()" aria-label="الوضع الليلي/النهاري"></button>
-    </div>
-    <div class="dashboard-container">
-        <div class="dashboard-header">
-            <div class="user-photo">
-                @if(auth()->user()->image)
-                    <img src="{{ auth()->user()->image }}" alt="الصورة الشخصية" />
-                @else
-                    <img src="{{ asset('images/default-user.png') }}" alt="الصورة الشخصية" />
-                @endif
-            </div>
-            <h1>مرحبا بك في لوحة التحكم </h1>
-            <p>هنا يمكنك مشاهدة معلومات حسابك وإدارة عملياتك</p>
+        <div class="mode-bar">
+            <button class="toggle-mode" id="toggleModeBtn" onclick="toggleMode()" aria-label="الوضع الليلي/النهاري"></button>
         </div>
-        <div class="dashboard-cards">
-            <div class="dashboard-card">
-                <h2>الاسم</h2>
-                <div class="value">{{ auth()->user()->name ?? '---' }}</div>
+        <div class="dashboard-container">
+            <div class="dashboard-header">
+                <div class="user-photo">
+                    @if(auth()->user()->image)
+                        <img src="{{ auth()->user()->image }}" alt="الصورة الشخصية" />
+                    @else
+                        <img src="{{ asset('images/default-user.png') }}" alt="الصورة الشخصية" />
+                    @endif
+                </div>
+                <h1>مرحبا بك في لوحة التحكم </h1>
+                <p>هنا يمكنك مشاهدة معلومات حسابك وإدارة عملياتك</p>
             </div>
-            <div class="dashboard-card">
-                <h2>البريد الإلكتروني</h2>
-                <div class="value">{{ auth()->user()->email ?? '---' }}</div>
+            <div class="dashboard-cards">
+                <div class="dashboard-card">
+                    <h2>الاسم</h2>
+                    <div class="value">{{ auth()->user()->name ?? '---' }}</div>
+                </div>
+                <div class="dashboard-card">
+                    <h2>البريد الإلكتروني</h2>
+                    <div class="value">{{ auth()->user()->email ?? '---' }}</div>
+                </div>
+                <div class="dashboard-card">
+                    <h2>الرصيد الحالي</h2>
+                    <div class="value">{{ auth()->user()->solde ?? '---' }} د.ج</div>
+                </div>
+                <div class="dashboard-card">
+                    <h2>رقم الحساب</h2>
+                    <div class="value">{{ auth()->user()->account ?? '---' }}</div>
+                </div>
             </div>
-            <div class="dashboard-card">
-                <h2>الرصيد الحالي</h2>
-                <div class="value">{{ auth()->user()->solde ?? '---' }} د.ج</div>
+            <div class="dashboard-links">
+                <a href="{{ route('logout') }}"
+                   onclick="event.preventDefault();document.getElementById('logout-form').submit();">تسجيل الخروج</a>
+                <a href="{{ route('register') }}">تسجيل مستخدم جديد</a>
+                <a href="{{ route('versment') }}">إجراء تحويل</a>
             </div>
-            <div class="dashboard-card">
-                <h2>رقم الحساب</h2>
-                <div class="value">{{ auth()->user()->account ?? '---' }}</div>
-            </div>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display:none;">
+                @csrf
+            </form>
+            <form action="{{ route('account.delete') }}" method="POST" onsubmit="return confirm('Bist du sicher, dass du deinen Account löschen möchtest?');" style="margin-top:20px;">
+                @csrf
+                @method('DELETE')
+                <button type="submit" style="background:red;color:white;padding:8px 16px;border:none;border-radius:4px;cursor:pointer;">
+                    حذف الحساب
+                </button>
+            </form>
         </div>
-        <div class="dashboard-links">
-            <a href="{{ route('logout') }}"
-               onclick="event.preventDefault();document.getElementById('logout-form').submit();">تسجيل الخروج</a>
-            <a href="{{ route('register') }}">تسجيل مستخدم جديد</a>
-            <a href="{{ route('versment') }}">إجراء تحويل</a>
-        </div>
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display:none;">
-            @csrf
-        </form>
-        <form action="{{ route('account.delete') }}" method="POST" onsubmit="return confirm('Bist du sicher, dass du deinen Account löschen möchtest?');" style="margin-top:20px;">
-    @csrf
-    @method('DELETE')
-    <button type="submit" style="background:red;color:white;padding:8px 16px;border:none;border-radius:4px;cursor:pointer;">
-        حذف الحساب
-    </button>
-</form>
-    </div>
-       <script>
-        // Icon SVGs
-        const moon = `<svg viewBox="0 0 24 24" fill="none"><path d="M21 12.79A9 9 0 0111.21 3a7 7 0 100 18A9 9 0 0021 12.79z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
-        const sun = `<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>`;
+        <script>
+            // Icon SVGs
+            const moon = `<svg viewBox="0 0 24 24" fill="none"><path d="M21 12.79A9 9 0 0111.21 3a7 7 0 100 18A9 9 0 0021 12.79z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+            const sun = `<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>`;
 
-        function setIcon() {
-            const btn = document.getElementById('toggleModeBtn');
-            if (!btn) return;
-            btn.innerHTML = document.body.classList.contains('dark') ? sun : moon;
-        }
-        function toggleMode() {
-            document.body.classList.toggle('dark');
-            localStorage.setItem('dashboardMode', document.body.classList.contains('dark') ? 'dark' : 'light');
-            setIcon();
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            if(localStorage.getItem('dashboardMode') === 'light') {
-                document.body.classList.remove('dark');
-            } else {
-                document.body.classList.add('dark');
+            function setIcon() {
+                const btn = document.getElementById('toggleModeBtn');
+                if (!btn) return;
+                btn.innerHTML = document.body.classList.contains('dark') ? sun : moon;
             }
-            setIcon();
-        });
-    </script>
+            function toggleMode() {
+                document.body.classList.toggle('dark');
+                localStorage.setItem('dashboardMode', document.body.classList.contains('dark') ? 'dark' : 'light');
+                setIcon();
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+                if(localStorage.getItem('dashboardMode') === 'light') {
+                    document.body.classList.remove('dark');
+                } else {
+                    document.body.classList.add('dark');
+                }
+                setIcon();
+            });
+        </script>
     @endif
-   
 </body>
 </html>

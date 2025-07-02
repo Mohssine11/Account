@@ -28,6 +28,9 @@
             --primary: #007bff;
             --primary-dark: #0056b3;
         }
+        body, label, .register-title, input, .login-link-row a {
+    color: var(--text);
+}
         body {
             background: linear-gradient(120deg, var(--bg) 0%, #cfd9df 100%);
             font-family: 'Segoe UI', Arial, sans-serif;
