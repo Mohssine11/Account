@@ -10,6 +10,7 @@ Route::post('/login', [AuthController::class, 'login'])->name('login.store');
 Route::get('/showversment', [AuthController::class, 'showversment'])->name('versment');
 Route::post('/versment', [AuthController::class, 'versment'])->name('versment.store');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::delete('/account/delete', [AuthController::class, 'deleteAccount'])->name('account.delete')->middleware('auth');
 Route::get('/dashboard', function () {
     return view('auth.dashboard');
 })->middleware('auth')->name('dashboard');

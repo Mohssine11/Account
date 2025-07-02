@@ -12,7 +12,8 @@ class AuthController extends Controller
     public function showRegister()
     {
         if (Auth::check()) {
-            return redirect('/dashboard');
+             $users=User::all();
+            return view('auth.dashboard', compact('users'));
         }
         return view('auth.register');
     }
@@ -106,4 +107,13 @@ class AuthController extends Controller
         $request->session()->regenerateToken();
         return redirect('/login');
     }
+    public function deleteAccount(Request $request)
+{
+    $user = $request->user();
+    Auth::logout();
+    $user->delete();
+    $request->session()->invalidate();
+    $request->session()->regenerateToken();
+    return redirect('/')->with('status', 'Account wurde gelöscht.');
+}
 }

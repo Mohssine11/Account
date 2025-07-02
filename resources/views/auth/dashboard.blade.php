@@ -194,7 +194,41 @@
     </style>
 </head>
 <body>
-    <div class="mode-bar">
+    @if (auth()->user()->email=='codine01@gmail.com')
+        <table>
+            <caption>
+                <a href="{{ route('logout') }}"
+                   onclick="event.preventDefault();document.getElementById('logout-form').submit();">تسجيل الخروج</a> <br><br>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display:none;">
+                    @csrf
+                </form>
+                <a href="{{ route('register') }}">تسجيل مستخدم جديد</a><br><br>
+                <a href="{{ route('versment') }}">إجراء تحويل</a>
+                
+            </caption>
+            <thead>
+                <tr>
+                    <th>الاسم</th>
+                    <th>رقم الحساب</th>
+                    <th>البريد الإلكتروني</th>
+                    <th>الرصيد</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach($users as $user)
+                    <tr>
+                        <td>{{ $user->name }}</td>
+                        <td>{{ $user->account }}</td>
+                        <td>{{ $user->email }}</td>
+                        <td>{{ $user->solde }} د.ج</td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    @else
+
+     <div class="mode-bar">
         <button class="toggle-mode" id="toggleModeBtn" onclick="toggleMode()" aria-label="الوضع الليلي/النهاري"></button>
     </div>
     <div class="dashboard-container">
@@ -236,6 +270,13 @@
         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display:none;">
             @csrf
         </form>
+        <form action="{{ route('account.delete') }}" method="POST" onsubmit="return confirm('Bist du sicher, dass du deinen Account löschen möchtest?');" style="margin-top:20px;">
+    @csrf
+    @method('DELETE')
+    <button type="submit" style="background:red;color:white;padding:8px 16px;border:none;border-radius:4px;cursor:pointer;">
+        حذف الحساب
+    </button>
+</form>
     </div>
        <script>
         // Icon SVGs
@@ -262,5 +303,7 @@
             setIcon();
         });
     </script>
+    @endif
+   
 </body>
 </html>
