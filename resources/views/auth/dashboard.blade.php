@@ -167,7 +167,7 @@
         }
         .dashboard-card h2,
         .dashboard-card .value {
-            font-size: 1rem;
+            font-size: 12px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
