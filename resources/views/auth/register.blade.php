@@ -231,7 +231,7 @@
 </head>
 
 <body>
-    <img src="{{ asset('./images/account.jpg') }}" width="70px" style="margin-right: 90%;margin-top: 10px;border-radius: 50%" alt="الصورة الشخصية" />
+    <img src="{{ asset('./images/account.jpg') }}" width="6%" style="margin-right: 90%;margin-top: 10px;border-radius: 50%" alt="الصورة الشخصية" />
 
     <div class="mode-bar">
         <button class="toggle-mode" id="toggleModeBtn" onclick="toggleMode()"
