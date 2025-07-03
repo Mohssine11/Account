@@ -1,6 +1,7 @@
 <!-- filepath: c:\xampp\htdocs\Test\resources\views\auth\login.blade.php -->
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,6 +18,7 @@
             --primary: #007bff;
             --primary-dark: #0056b3;
         }
+
         body.dark {
             --bg: #232526;
             --container-bg: #23272b;
@@ -28,6 +30,7 @@
             --primary: #007bff;
             --primary-dark: #0056b3;
         }
+
         body {
             background: linear-gradient(120deg, var(--bg) 0%, #cfd9df 100%);
             font-family: 'Segoe UI', Arial, sans-serif;
@@ -36,6 +39,7 @@
             min-height: 100vh;
             transition: background 0.3s, color 0.3s;
         }
+
         .mode-bar {
             width: 100%;
             display: flex;
@@ -47,6 +51,7 @@
             left: 0;
             z-index: 20;
         }
+
         .toggle-mode {
             background: var(--container-bg);
             color: var(--text);
@@ -61,29 +66,33 @@
             cursor: pointer;
             transition: background 0.3s, color 0.3s, border 0.3s;
             margin-left: 40px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
         }
+
         .toggle-mode:hover {
             background: var(--primary);
             color: #fff;
             border: 1px solid var(--primary-dark);
         }
+
         .toggle-mode svg {
             width: 26px;
             height: 26px;
             display: block;
         }
+
         .login-card {
             max-width: 420px;
             margin: 100px auto 0 auto;
             background: var(--card-bg);
             border-radius: 18px;
-            box-shadow: 0 6px 32px rgba(0,0,0,0.10);
+            box-shadow: 0 6px 32px rgba(0, 0, 0, 0.10);
             padding: 38px 28px 28px 28px;
             direction: rtl;
             border: 1.5px solid var(--input-border);
             transition: background 0.3s, color 0.3s, border 0.3s;
         }
+
         .login-title {
             text-align: center;
             color: var(--primary);
@@ -92,6 +101,7 @@
             margin-bottom: 28px;
             letter-spacing: 1px;
         }
+
         label {
             margin-bottom: 5px;
             font-weight: 600;
@@ -99,7 +109,9 @@
             text-align: right;
             font-size: 14px;
         }
-        input[type="email"], input[type="password"] {
+
+        input[type="email"],
+        input[type="password"] {
             width: 100%;
             box-sizing: border-box;
             margin-bottom: 14px;
@@ -112,16 +124,20 @@
             transition: border 0.2s, box-shadow 0.2s, background 0.3s, color 0.3s;
             outline: none;
         }
-        input[type="email"]:focus, input[type="password"]:focus {
+
+        input[type="email"]:focus,
+        input[type="password"]:focus {
             border: 1.5px solid var(--primary);
-            box-shadow: 0 0 0 2px rgba(0,123,255,0.08);
+            box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.08);
             background: #fff;
         }
+
         .button-row {
             display: flex;
             justify-content: center;
             margin-top: 18px;
         }
+
         button[type="submit"] {
             width: 30%;
             min-width: 110px;
@@ -134,26 +150,31 @@
             font-weight: bold;
             cursor: pointer;
             transition: background 0.2s, transform 0.1s;
-            box-shadow: 0 2px 8px rgba(0,123,255,0.08);
+            box-shadow: 0 2px 8px rgba(0, 123, 255, 0.08);
         }
+
         button[type="submit"]:hover {
             background: linear-gradient(90deg, var(--primary-dark) 60%, var(--primary) 100%);
             transform: translateY(-2px) scale(1.03);
         }
+
         .register-link-row {
             text-align: center;
             margin-top: 18px;
         }
+
         .register-link-row a {
             color: var(--primary);
             text-decoration: none;
             font-size: 1rem;
             transition: color 0.2s;
         }
+
         .register-link-row a:hover {
             color: var(--primary-dark);
             text-decoration: underline;
         }
+
         .alert-error {
             background: #ffeaea;
             color: #a94442;
@@ -163,20 +184,27 @@
             margin-bottom: 18px;
             text-align: right;
         }
+
         @media (max-width: 700px) {
             .login-card {
                 padding: 18px 4px 10px 4px;
                 margin: 24px 4px 0 4px;
             }
+
             button[type="submit"] {
                 width: 100%;
             }
         }
     </style>
 </head>
+
 <body>
+    <img src="{{ asset('./images/account.jpg') }}" width="6%"
+        style="margin-right: 90%;margin-top: 10px;border-radius: 50%" alt="الصورة الشخصية" />
+
     <div class="mode-bar">
-        <button class="toggle-mode" id="toggleModeBtn" onclick="toggleMode()" aria-label="الوضع الليلي/النهاري"></button>
+        <button class="toggle-mode" id="toggleModeBtn" onclick="toggleMode()"
+            aria-label="الوضع الليلي/النهاري"></button>
     </div>
     <div class="login-card">
         <form method="POST" action="{{route('login.store')  }}">
@@ -193,7 +221,8 @@
             <input type="email" id="email" name="email" required autocomplete="email" placeholder="example@email.com">
 
             <label for="password">كلمة المرور</label>
-            <input type="password" id="password" name="password" required autocomplete="current-password" placeholder="********">
+            <input type="password" id="password" name="password" required autocomplete="current-password"
+                placeholder="********">
 
             <div class="button-row">
                 <button type="submit">دخول</button>
@@ -216,9 +245,9 @@
             localStorage.setItem('loginMode', document.body.classList.contains('dark') ? 'dark' : 'light');
             setIcon();
         }
-        (function() {
+        (function () {
             // Dark-Mode ist jetzt Standard!
-            if(localStorage.getItem('loginMode') === 'light') {
+            if (localStorage.getItem('loginMode') === 'light') {
                 document.body.classList.remove('dark');
             } else {
                 document.body.classList.add('dark');
@@ -227,4 +256,5 @@
         })();
     </script>
 </body>
+
 </html>
